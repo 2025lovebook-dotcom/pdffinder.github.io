@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional service for finding electronic books, articles, and standards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.7; /* 增加行高提升可读性 */
+            font-size: 16px; /* 基准字体调大 */
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 50px 40px; /* 增加内边距 */
+            margin: 40px auto;
+            animation: fadeInUp 0.8s ease-out;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 35px;
+            border-bottom: 1px solid rgba(118, 75, 162, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 3rem; /* 调大标题字体 */
+            color: #2c3e50;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+        }
+        
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 10%;
+            width: 80%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            border-radius: 3px;
+        }
+        
+        .header p {
+            color: #5a6b7d; /* 加深文字颜色提升可读性 */
+            font-size: 1.3rem; /* 调大副标题字体 */
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 500;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* 加宽卡片最小宽度 */
+            gap: 35px;
+            margin-bottom: 70px;
+        }
+        
+        /* 为不同卡片设计差异化背景 */
+        .service-card {
+            border-radius: 20px;
+            padding: 40px 35px;
+            text-align: center;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.09);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+        
+        /* 卡片1：淡蓝渐变 */
+        .service-card:nth-child(1) {
+            background: linear-gradient(135deg, #f0f8fb 0%, #e8f4f8 100%);
+        }
+        
+        /* 卡片2：淡紫渐变 */
+        .service-card:nth-child(2) {
+            background: linear-gradient(135deg, #fef7fb 0%, #fdf2f8 100%);
+        }
+        
+        /* 卡片3：淡绿渐变 */
+        .service-card:nth-child(3) {
+            background: linear-gradient(135deg, #f5fafe 0%, #eaf6fa 100%);
+        }
+        
+        /* 卡片4：淡黄渐变 */
+        .service-card:nth-child(4) {
+            background: linear-gradient(135deg, #faf6ed 0%, #f7f3e9 100%);
+        }
+        
+        /* 卡片5：淡粉渐变 */
+        .service-card:nth-child(5) {
+            background: linear-gradient(135deg, #fef0f0 0%, #fee8e8 100%);
+        }
+        
+        /* 卡片6：淡青渐变 */
+        .service-card:nth-child(6) {
+            background: linear-gradient(135deg, #e8f4f8 0%, #eaf6fa 100%);
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+        
+        .service-card:hover::before {
+            left: 100%;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-icon {
+            width: 100px; /* 调大图标容器 */
+            height: 100px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem; /* 调大图标字体 */
+            color: white;
+            animation: pulse 2.5s infinite;
+            box-shadow: 0 8px 20px rgba(118, 75, 162, 0.25);
+        }
+        
+        /* 为不同卡片图标设计差异化渐变 */
+        .service-card:nth-child(1) .service-icon {
+            background: linear-gradient(135deg, #4299e1, #38b2ac);
+        }
+        
+        .service-card:nth-child(2) .service-icon {
+            background: linear-gradient(135deg, #9f7aea, #805ad5);
+        }
+        
+        .service-card:nth-child(3) .service-icon {
+            background: linear-gradient(135deg, #38b2ac, #48bb78);
+        }
+        
+        .service-card:nth-child(4) .service-icon {
+            background: linear-gradient(135deg, #ed8936, #f6ad55);
+        }
+        
+        .service-card:nth-child(5) .service-icon {
+            background: linear-gradient(135deg, #e53e3e, #fc8181);
+        }
+        
+        .service-card:nth-child(6) .service-icon {
+            background: linear-gradient(135deg, #4299e1, #63b3ed);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+        
+        .service-card h3 {
+            color: #2d3748;
+            margin-bottom: 22px;
+            font-size: 1.8rem; /* 调大卡片标题字体 */
+            position: relative;
+            padding-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .service-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            border-radius: 2px;
+        }
+        
+        /* 为不同卡片标题下划线匹配对应颜色 */
+        .service-card:nth-child(1) h3::after { background: #4299e1; }
+        .service-card:nth-child(2) h3::after { background: #9f7aea; }
+        .service-card:nth-child(3) h3::after { background: #38b2ac; }
+        .service-card:nth-child(4) h3::after { background: #ed8936; }
+        .service-card:nth-child(5) h3::after { background: #e53e3e; }
+        .service-card:nth-child(6) h3::after { background: #4299e1; }
+        
+        .service-card p {
+            color: #4a5568; /* 加深文字颜色 */
+            margin-bottom: 30px;
+            line-height: 1.8;
+            font-size: 1.15rem; /* 调大卡片描述字体 */
+        }
+        
+        .price {
+            font-size: 2.4rem; /* 调大价格字体 */
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* 为不同卡片价格设计差异化背景 */
+        .service-card:nth-child(1) .price {
+            color: #4299e1;
+            background: rgba(66, 153, 225, 0.1);
+        }
+        
+        .service-card:nth-child(2) .price {
+            color: #9f7aea;
+            background: rgba(159, 122, 234, 0.1);
+        }
+        
+        .service-card:nth-child(3) .price {
+            color: #38b2ac;
+            background: rgba(56, 178, 172, 0.1);
+        }
+        
+        .service-card:nth-child(4) .price {
+            color: #ed8936;
+            background: rgba(237, 137, 54, 0.1);
+        }
+        
+        .service-card:nth-child(5) .price {
+            color: #e53e3e;
+            background: rgba(229, 62, 62, 0.1);
+        }
+        
+        .service-card:nth-child(6) .price {
+            color: #4299e1;
+            background: rgba(66, 153, 225, 0.1);
+        }
+        
+        .service-card:hover .price {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .contact-section {
+            text-align: center;
+            padding: 60px 30px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+        
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .contact-section h2 {
+            color: #2d3748;
+            margin-bottom: 40px;
+            font-size: 2.4rem; /* 调大联系区标题字体 */
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+        }
+        
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 35px; /* 加大按钮内边距 */
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            position: relative;
+            overflow: hidden;
+            min-width: 200px; /* 加大按钮最小宽度 */
+            font-size: 1.15rem; /* 调大按钮字体 */
+        }
+        
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+        
+        .social-btn:hover::before {
+            left: 100%;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+        }
+        
+        .instagram {
+            background: linear-gradient(135deg, #e4405f, #833ab4);
+            color: white;
+        }
+        
+        .facebook {
+            background: linear-gradient(135deg, #1877f2, #4267b2);
+            color: white;
+        }
+        
+        .line {
+            background: linear-gradient(135deg, #00b900, #00c300);
+            color: white;
+        }
+        
+        .icon {
+            margin-right: 12px;
+            font-size: 1.4rem; /* 调大社交图标字体 */
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(118, 75, 162, 0.15);
+            color: #4a5568;
+            font-size: 1.05rem; /* 调大页脚字体 */
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 35px 20px;
+                margin: 20px auto;
+            }
+            
+            .header h1 {
+                font-size: 2.4rem;
+            }
+            
+            .header p {
+                font-size: 1.15rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .service-card {
+                padding: 35px 25px;
+            }
+            
+            .service-card h3 {
+                font-size: 1.6rem;
+            }
+            
+            .service-card p {
+                font-size: 1.05rem;
+            }
+            
+            .price {
+                font-size: 2rem;
+            }
+            
+            .contact-section h2 {
+                font-size: 2rem;
+            }
+            
+            .social-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-btn {
+                width: 100%;
+                max-width: 320px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Professional service for finding electronic books, articles, and standards</h1>
+            <p>High quality • Fast delivery • Professional service</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Chinese e-book search service</h3>
+                <p>We can help you find various Chinese e-books. High quality guaranteed, fast delivery.</p>
+                <div class="price">$3/book</div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>English e-book search service</h3>
+                <p>We can help you find various English e-books. High quality guaranteed, fast delivery.</p>
+                <div class="price">$3/book</div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <h3>Article download service</h3>
+                <p>We offer a service to download various articles; the price is generally $1 per article, or $2 per article for those published after 2020.</p>
+                <div class="price">$1-2/article</div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-file-export"></i>
+                </div>
+                <h3>Format conversion service</h3>
+                <p>Convert between MOBI, EPUB, DOC, TXT, or PDF formats to be compatible with different e-readers.</p>
+                <div class="price">$1/book</div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <h3>Convert scanned PDF to Word</h3>
+                <p>Convert a scanned PDF into an editable Word document using OCR, without altering its layout.</p>
+                <div class="price">$3/book</div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-file-contract"></i>
+                </div>
+                <h3>Industry standard documents</h3>
+                <p>We can help you find and download various industry standards.</p>
+                <div class="price">$3/article</div>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h2>Contact us to inquire about our services</h2>
+            <div class="social-buttons">
+                <!-- 替换为实际的Whatsapp链接 -->
+                <a href="https://wa.me/message/MULRU2AQRLQFO1" class="social-btn whatsapp" target="_blank">
+                    <span class="icon"><i class="fab fa-whatsapp"></i></span>
+                    WhatsApp
+                </a>
+                <!-- 替换为实际的Telegram链接 -->
+                <a href="https://t.me/BookFinderService" class="social-btn instagram" target="_blank">
+                    <span class="icon"><i class="fab fa-telegram-plane"></i></span>
+                    Telegram
+                </a>
+                <!-- 替换为实际的Facebook链接 -->
+                <a href="https://www.facebook.com/share/182ZBTdK4R/?mibextid=wwXIfr" class="social-btn facebook" target="_blank">
+                    <span class="icon"><i class="fab fa-facebook-f"></i></span>
+                    Facebook
+                </a>
+                <!-- 替换为实际的Line链接 -->
+                <a href="https://line.me/ti/p/zdK9m_KyXQ" class="social-btn line" target="_blank">
+                    <span class="icon"><i class="fab fa-line"></i></span>
+                    Line
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2023 Professional E-Resource Service. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // 添加平滑滚动效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 为服务卡片添加渐入动画
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
